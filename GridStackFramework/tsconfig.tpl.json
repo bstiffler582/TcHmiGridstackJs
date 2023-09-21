@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "none",
+    "moduleDetection": "auto",
+    "target": "ES2020",
+    "skipLibCheck": false,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2019",
+      "ES2020.BigInt"
+    ],
+    "types": [],
+    "declaration": true,
+    "sourceMap": true,
+    "noEmitOnError": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "alwaysStrict": false,
+    "ignoreDeprecations": "5.0"
+  },
+  "include": [
+    "$(Beckhoff.TwinCAT.HMI.Framework).InstallPath/TcHmi.d.ts",
+    "$(Beckhoff.TwinCAT.HMI.Framework).InstallPath/Controls/System/TcHmiContainer/TcHmiContainer.d.ts"
+  ]
+}

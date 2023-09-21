@@ -1,0 +1,60 @@
+{
+  "parameters": [
+    {
+      "name": "data-tchmi-index",
+      "displayName": "Index",
+      "allowSymbolExpressionsInObject": false,
+      "visible": true,
+      "type": "tchmi:general#/definitions/Number",
+      "category": "",
+      "description": "",
+      "defaultValue": 0.0,
+      "defaultValueInternal": 0.0,
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "Index",
+      "propertySetterName": "setIndex",
+      "propertyGetterName": "getIndex",
+      "refTo": ""
+    },
+    {
+      "name": "data-tchmi-axis",
+      "displayName": "Axis",
+      "allowSymbolExpressionsInObject": false,
+      "visible": true,
+      "type": "tchmi:server#/definitions/PLC1.FB_Axis",
+      "category": "",
+      "description": "",
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "Axis",
+      "propertySetterName": "setAxis",
+      "propertyGetterName": "getAxis",
+      "refTo": ""
+    },
+    {
+      "name": "data-tchmi-faults",
+      "displayName": "Faults",
+      "allowSymbolExpressionsInObject": false,
+      "visible": true,
+      "type": "tchmi:server#/definitions/PLC1.ST_AxisFault",
+      "category": "",
+      "description": "",
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": true,
+      "propertyName": "Faults",
+      "propertySetterName": "setFaults",
+      "propertyGetterName": "getFaults",
+      "refTo": ""
+    }
+  ],
+  "virtualRights": [],
+  "$schema": "./../Packages/Beckhoff.TwinCAT.HMI.Framework.12.760.48/runtimes/native1.12-tchmi/Schema/UserControlConfig.Schema.json",
+  "description": ""
+}

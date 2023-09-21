@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "definitions": {
+    "TcHmi.Controls.GridStackFramework.GridstackContainer": {
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "GridstackContainer",
+      "frameworkControlNamespace": "TcHmi.Controls.GridStackFramework"
+    },
+    "AttributeList": {
+      "items": {
+        "$ref": "tchmi:framework#/definitions/AttributeListItem"
+      },
+      "title": "AttributeListItem",
+      "type": "array",
+      "engineeringDefaultDatatype": 0,
+      "id": "tchmi:framework#/definitions/AttributeList"
+    },
+    "AttributeListItem": {
+      "properties": {
+        "attribute": {
+          "type": "string"
+        },
+        "binding": {
+          "type": "string"
+        },
+        "serverSymbol": {
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "title": "List Item",
+      "description": "List Item List",
+      "engineeringColumns": [
+        "attribute",
+        "binding",
+        "serverSymbol"
+      ],
+      "id": "tchmi:framework#/definitions/AttributeListItem",
+      "propertiesMeta": [
+        {
+          "category": "General",
+          "defaultValue": "data-tchmi-",
+          "defaultValueInternal": "data-tchmi-",
+          "description": "Control attribute",
+          "displayName": "Attribute",
+          "displayPriority": 10,
+          "name": "attribute"
+        },
+        {
+          "category": "General",
+          "defaultValue": null,
+          "defaultValueInternal": null,
+          "description": "Symbol or expression to bind to control attribute",
+          "displayName": "Binding",
+          "displayPriority": 10,
+          "name": "binding"
+        },
+        {
+          "category": "General",
+          "defaultValue": false,
+          "defaultValueInternal": false,
+          "description": "If true, the binding will be resolved as a server (PLC) symbol",
+          "displayName": "Server Symbol",
+          "displayPriority": 10,
+          "name": "serverSymbol"
+        }
+      ]
+    }
+  }
+}

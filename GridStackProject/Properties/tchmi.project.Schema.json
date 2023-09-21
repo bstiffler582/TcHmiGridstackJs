@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "Symbol_Of_TcHmiControl": {
+      "allOf": [
+        {
+          "$ref": "tchmi:framework#/definitions/Symbol"
+        },
+        {
+          "$ref": "tchmi:framework#/definitions/TcHmiControl"
+        }
+      ]
+    },
+    "UC_Axis": {
+      "properties": {},
+      "type": "object",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff",
+      "frameworkControlType": "TcHmi.Controls.System.TcHmiUserControl",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkUserControlConfig": "User Controls\\UC_Axis.usercontrol.json",
+      "id": "tchmi:project#/definitions/UC_Axis"
+    },
+    "UC_WidgetSelector": {
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff",
+      "frameworkControlType": "TcHmi.Controls.System.TcHmiUserControl",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkUserControlConfig": "User Controls\\UC_WidgetSelector.usercontrol.json",
+      "id": "tchmi:project#/definitions/UC_WidgetSelector",
+      "type": "object"
+    }
+  }
+}

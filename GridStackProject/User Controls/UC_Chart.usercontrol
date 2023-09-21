@@ -1,0 +1,77 @@
+<div id="Chart" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControl" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="100" data-tchmi-height="100" data-tchmi-width-unit="%" data-tchmi-height-unit="%" data-tchmi-creator-viewport-width="300" data-tchmi-creator-viewport-height="300">
+
+
+<div id="TcHmiBarChart" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiBarChart" data-tchmi-left="5" data-tchmi-left-unit="px" data-tchmi-top="5" data-tchmi-top-unit="px" data-tchmi-x-axis-name="x Axis" data-tchmi-y-axis-name="y Axis 1" data-tchmi-y-axis-unit="s" data-tchmi-y-main-tick-max-value="100" data-tchmi-y-main-tick-min-value="0" data-tchmi-y-sub-tick-steps="4" data-tchmi-right="5" data-tchmi-bottom="5">
+<script data-tchmi-target-attribute="data-tchmi-bar-graph-data" type="application/json">
+[
+  [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+  ],
+  [
+    100,
+    90,
+    80,
+    70,
+    60,
+    50,
+    40,
+    30,
+    20,
+    10,
+    0
+  ]
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-bar-graph-descriptions" type="application/json">
+[
+  {
+    "barColor": "%tr%Control::TcHmi.Controls.Beckhoff.TcHmiBarChart::DefaultGraphColor%/tr%",
+    "legendName": "data0"
+  },
+  {
+    "barColor": "%tr%Control::TcHmi.Controls.Beckhoff.TcHmiBarChart::DefaultGraphColor%/tr%",
+    "legendName": "data1"
+  }
+]
+</script>
+
+</div>
+
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-color" type="application/json">
+{
+  "color": "rgba(0, 0, 0, 1)"
+}
+</script>
+</div>

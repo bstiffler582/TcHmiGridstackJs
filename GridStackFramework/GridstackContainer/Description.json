@@ -1,0 +1,135 @@
+{
+  "$schema": "../.hmiframework/Schema/ControlDescription.Schema.json",
+  "apiVersion": 1,
+  "name": "GridstackContainer",
+  "namespace": "TcHmi.Controls.GridStackFramework",
+  "displayName": "GridstackContainer",
+  "version": {
+    "full": "1.0.0.0",
+    "major": 1,
+    "minor": 0,
+    "revision": 0,
+    "build": 0
+  },
+  "visible": true,
+  "themeable": "Standard",
+  "base": "TcHmi.Controls.System.TcHmiContainer",
+  "description": "This description text will be used as a Tooltip in Visual Studio.",
+  "properties": {
+    "containerControl": false,
+    "geometry": {
+      "width": 150,
+      "height": 150
+    }
+  },
+  "icons": [
+    {
+      "name": "Icons/16x16.png",
+      "width": 16,
+      "height": 16
+    }
+  ],
+  "template": "Template.html",
+  "dependencyFiles": [
+    {
+      "name": "GridstackContainer.js",
+      "type": "JavaScript",
+      "description": "Contains all the main logic."
+    },
+    {
+      "name": "Style.css",
+      "type": "Stylesheet",
+      "description": "Theme independent style"
+    },
+    {
+      "name": "../lib/gridstack-all.js",
+      "type": "JavaScript",
+      "description": ""
+    },
+    {
+      "name": "../lib/gridstack.min.css",
+      "type": "Stylesheet",
+      "description": ""
+    }
+  ],
+    "themes": {
+        "Base": {
+            "resources": [
+                {
+                    "name": "Themes/Base/Style.css",
+                    "type": "Stylesheet",
+                    "description": "Theme dependent style"
+                }
+            ]
+        },
+        "Base-Dark": {
+            "resources": [
+                {
+                    "name": "Themes/Base-Dark/Style.css",
+                    "type": "Stylesheet",
+                    "description": "Theme dependent style"
+                }
+            ]
+        }
+    },
+  "attributes": [
+    {
+      "name": "widgets",
+      "displayName": "Widgets",
+      "propertyGetterName": "getWidgets",
+      "propertySetterName": "setWidgets",
+      "propertyName": "widgets",
+      "type": "tchmi:general#/definitions/Array",
+      "bindable": true,
+      "category": "Common",
+      "defaultValue": {},
+      "description": "Initial widget configuration to load"
+    }
+  ],
+  "attributeCategories": [],
+  "functions": [
+    {
+      "category": "Actions",
+      "displayName": "AddWidget",
+      "heritable": true,
+      "name": "addWidget",
+      "type": null,
+      "visible": true,
+      "description": "Add a widget to the grid",
+      "params": []
+    },
+    {
+      "category": "Actions",
+      "displayName": "CreateWidget",
+      "heritable": true,
+      "name": "createWidget",
+      "type": null,
+      "visible": true,
+      "description": "Instantiate configured widget",
+      "params": [
+        {
+          "displayName": "AttributeList",
+          "name": "attributeList",
+          "type": "tchmi:framework#/definitions/AttributeList",
+          "visible": true,
+          "bindable": false,
+          "description": "Attribute/symbol dictionary of additional user control mappings"
+        },
+        {
+          "displayName": "SelectorControl",
+          "name": "selectorControl",
+          "type": "tchmi:framework#/definitions/Control",
+          "visible": true,
+          "bindable": true,
+          "description": "Instantiating Widget control"
+        }
+      ]
+    }
+  ],
+  "events": [],
+  "dataTypes": [
+    {
+      "schema": "Schema/Types.Schema.json"
+    }
+  ]
+}
