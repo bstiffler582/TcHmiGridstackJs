@@ -11,7 +11,7 @@ var TcHmi;
     (function (/** @type {globalThis.TcHmi.Controls} */ Controls) {
         let GridStackFramework;
         (function (GridStackFramework) {
-            class GridstackContainer extends TcHmi.Controls.System.TcHmiContainer {
+            class GridstackContainer extends TcHmi.Controls.System.TcHmiControl {
 
                 /*
                 Attribute philosophy
@@ -21,9 +21,6 @@ var TcHmi;
                 - Because of the "changed detection" in the setter, the value is only processed once during compilation.
                 - Attention: If we have a Server Binding on an Attribute, the setter will be called once with null to initialize and later with the correct value.
                 */
-
-                __grid = {};
-                __widgets = [];
 
                 /**
                  * Constructor of the control
@@ -35,18 +32,22 @@ var TcHmi;
                 constructor(element, pcElement, attrs) {
                     /** Call base class constructor */
                     super(element, pcElement, attrs);
+
+                    this.__grid = null;
+                    this.__cache = null;
                 }
                 /**
                  * Raised after the control was added to the control cache and the constructors of all base classes were called.
                  */
                 __previnit() {
+                    // Call __previnit of base class
+                    super.__previnit();
+
                     // Fetch template root element
                     this.__elementTemplateRoot = this.__element.find('.TcHmi_Controls_GridStackFramework_GridstackContainer-Template');
                     if (this.__elementTemplateRoot.length === 0) {
                         throw new Error('Invalid Template.html');
                     }
-                    // Call __previnit of base class
-                    super.__previnit();
                 }
                 /**
                  * Is called during control initialization after the attribute setters have been called. 
@@ -62,19 +63,32 @@ var TcHmi;
                 __attach() {
                     super.__attach();
 
+                    /**
+                     * Initialize everything which is only available while the control is part of the active dom.
+                     */
+
+                    // grid-stack container element is deleted with grid.destroy(),
+                    // so we must re-create it
+                    if (!this.__elementTemplateRoot.children('.grid-stack').length) {
+                        this.__elementTemplateRoot.append(
+                            "<div class=\"grid-stack\"></div>"
+                        );
+                    }
+
+                    // gridstack options
                     var options = {
                         draggable: {
                             scroll: true
                         },
-                        float: true,
-                        removable: '#trash'
+                        float: true
                     };
 
                     this.__grid = GridStack.init(options);
 
-                    /**
-                     * Initialize everything which is only available while the control is part of the active dom.
-                     */
+                    // keepAlive is active and cache data available
+                    if (this.__keepAlive && this.__cache) {
+                        this.__grid.load(this.__cache);
+                    }
                 }
                 /**
                  * Is called by the system when the control instance is no longer part of the active DOM.
@@ -87,6 +101,19 @@ var TcHmi;
                      * Disable everything that is not needed while the control is not part of the active DOM.
                      * For example, there is usually no need to listen for events!
                      */
+
+                    // cache gridstack layout and elements manually
+                    // for some reason element content not retained with call to grid.save()??
+                    this.__cache = [];
+                    this.__grid.save(true, true, (e) => {
+                        this.__cache.push({ x: e.x, y: e.y, h: e.h, w: e.w, el: e.el  });
+                    });
+
+                    // destroy grid
+                    this.__grid.destroy();
+
+                    // remove extra gridstack <style> elements
+                    this.__elementTemplateRoot.empty();
                 }
 
                 /* internal functions */
@@ -129,7 +156,7 @@ var TcHmi;
                     // add widget selector control
                     const ctrl = TcHmi.ControlFactory.createEx(
                         'TcHmi.Controls.System.TcHmiUserControlHost',
-                        tchmi_create_guid(),
+                        'creator_' + tchmi_create_guid(),
                         { 'data-tchmi-target-user-control': './User Controls/UC_WidgetSelector.usercontrol' },
                         this
                     );
@@ -147,7 +174,7 @@ var TcHmi;
                         // create
                         const ctrl = TcHmi.ControlFactory.createEx(
                             'TcHmi.Controls.System.TcHmiUserControlHost',
-                            tchmi_create_guid(),
+                            'widget_' + tchmi_create_guid(),
                             attributeMap,
                             this
                         );
@@ -155,6 +182,10 @@ var TcHmi;
                         // get user control host to remove widget selector from grid
                         const [oldElement] = selectorControl.getElement()
                             .parent().parent();
+
+                        // remove from TcHmi control
+                        this.__removeChild(selectorControl.__parent);
+                        // remove from grid
                         this.__grid.removeWidget(oldElement);
 
                         // add newly created widget
@@ -163,17 +194,25 @@ var TcHmi;
                     }
                 }
 
+                removeWidget(control) {
+                    // get host control
+                    const [element] = control.getElement()
+                        .parent().parent();
+                    // remove
+                    this.__removeChild(control.__parent);
+                    this.__grid.removeWidget(element);
+                }
+
                 /* property accessors */
-
                 getWidgets() {
-                    return this.__widgets;
+                    return this.__cache;
                 }
 
-                setWidgets(widgets) {
-                    if (widgets) {
-                        this.__widgets = widgets;
-                    }
+                setWidgets(value) {
+                    if (value.length)
+                        this.__cache = value;
                 }
+
             }
             GridStackFramework.GridstackContainer = GridstackContainer;
         })(GridStackFramework = Controls.GridStackFramework || (Controls.GridStackFramework = {}));

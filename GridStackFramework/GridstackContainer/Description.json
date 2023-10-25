@@ -13,10 +13,10 @@
   },
   "visible": true,
   "themeable": "Standard",
-  "base": "TcHmi.Controls.System.TcHmiContainer",
+  "base": "TcHmi.Controls.System.TcHmiControl",
   "description": "This description text will be used as a Tooltip in Visual Studio.",
   "properties": {
-    "containerControl": false,
+    "containerControl": true,
     "geometry": {
       "width": 150,
       "height": 150
@@ -52,26 +52,26 @@
       "description": ""
     }
   ],
-    "themes": {
-        "Base": {
-            "resources": [
-                {
-                    "name": "Themes/Base/Style.css",
-                    "type": "Stylesheet",
-                    "description": "Theme dependent style"
-                }
-            ]
-        },
-        "Base-Dark": {
-            "resources": [
-                {
-                    "name": "Themes/Base-Dark/Style.css",
-                    "type": "Stylesheet",
-                    "description": "Theme dependent style"
-                }
-            ]
+  "themes": {
+    "Base": {
+      "resources": [
+        {
+          "name": "Themes/Base/Style.css",
+          "type": "Stylesheet",
+          "description": "Theme dependent style"
         }
+      ]
     },
+    "Base-Dark": {
+      "resources": [
+        {
+          "name": "Themes/Base-Dark/Style.css",
+          "type": "Stylesheet",
+          "description": "Theme dependent style"
+        }
+      ]
+    }
+  },
   "attributes": [
     {
       "name": "widgets",
@@ -80,7 +80,8 @@
       "propertySetterName": "setWidgets",
       "propertyName": "widgets",
       "type": "tchmi:general#/definitions/Array",
-      "bindable": true,
+      "bindable": false,
+      "visible": false,
       "category": "Common",
       "defaultValue": {},
       "description": "Initial widget configuration to load"
@@ -97,6 +98,25 @@
       "visible": true,
       "description": "Add a widget to the grid",
       "params": []
+    },
+    {
+      "category": "Actions",
+      "displayName": "RemoveWidget",
+      "heritable": true,
+      "name": "removeWidget",
+      "type": null,
+      "visible": true,
+      "description": "Remove a widget from the grid",
+      "params": [
+        {
+          "displayName": "Control",
+          "name": "control",
+          "type": "tchmi:framework#/definitions/Control",
+          "visible": true,
+          "bindable": true,
+          "description": "Control to remove"
+        }
+      ]
     },
     {
       "category": "Actions",

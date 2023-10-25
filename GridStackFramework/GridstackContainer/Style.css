@@ -9,6 +9,11 @@
 		height: 100%;
 	}
 
+    .grid-stack {
+        height: 100%;
+        width: 100%;
+    }
+
 
 /* If the main use for this control is interaction
     uncomment the following lines to give user feedback:

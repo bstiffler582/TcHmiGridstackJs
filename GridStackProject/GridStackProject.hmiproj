@@ -110,6 +110,12 @@
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
   <Target Name="ReBuild" DependsOnTargets="Clean; Build" />
   <ItemGroup>
+    <Content Include="Pages\Grid.content">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Pages\Settings.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="User Controls\UC_Chart.usercontrol">
       <SubType>Content</SubType>
     </Content>
@@ -140,6 +146,7 @@
     <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
     <Folder Include="Functions" />
+    <Folder Include="Pages" />
     <Folder Include="User Controls" />
     <Folder Include="Themes" />
     <Folder Include="Themes\Base-Dark\Images\" />
