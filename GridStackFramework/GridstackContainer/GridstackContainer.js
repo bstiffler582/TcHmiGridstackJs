@@ -205,6 +205,9 @@ var TcHmi;
 
                 /* property accessors */
                 getWidgets() {
+                    this.__grid.save(true, true, (e) => {
+                        this.__cache.push({ x: e.x, y: e.y, h: e.h, w: e.w, el: e.el });
+                    });
                     return this.__cache;
                 }
 
