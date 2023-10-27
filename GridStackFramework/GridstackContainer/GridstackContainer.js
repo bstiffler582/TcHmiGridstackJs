@@ -34,7 +34,7 @@ var TcHmi;
                     super(element, pcElement, attrs);
 
                     this.__grid = null;
-                    this.__cache = null;
+                    this.__widgets = null;
                 }
                 /**
                  * Raised after the control was added to the control cache and the constructors of all base classes were called.
@@ -76,19 +76,25 @@ var TcHmi;
                     }
 
                     // gridstack options
-                    var options = {
-                        draggable: {
-                            scroll: true
-                        },
-                        float: true
-                    };
+                    if (!this.__grid) {
+                        var options = {
+                            draggable: {
+                                scroll: true
+                            },
+                            float: true
+                        };
+                        this.__grid = GridStack.init(options);
 
-                    this.__grid = GridStack.init(options);
+                        if (this.__widgets) {
+                            this.__grid.load(this.__widgets);
+                        }
 
-                    // keepAlive is active and cache data available
-                    if (this.__keepAlive && this.__cache) {
-                        this.__grid.load(this.__cache);
+                    } else {
+                        // force re-render
+                        this.setRight(this.getRight() + 1);
+                        setTimeout(() => { this.setRight(this.getRight() - 1) }, 500);
                     }
+                    
                 }
                 /**
                  * Is called by the system when the control instance is no longer part of the active DOM.
@@ -101,19 +107,6 @@ var TcHmi;
                      * Disable everything that is not needed while the control is not part of the active DOM.
                      * For example, there is usually no need to listen for events!
                      */
-
-                    // cache gridstack layout and elements manually
-                    // for some reason element content not retained with call to grid.save()??
-                    this.__cache = [];
-                    this.__grid.save(true, true, (e) => {
-                        this.__cache.push({ x: e.x, y: e.y, h: e.h, w: e.w, el: e.el  });
-                    });
-
-                    // destroy grid
-                    this.__grid.destroy();
-
-                    // remove extra gridstack <style> elements
-                    this.__elementTemplateRoot.empty();
                 }
 
                 /* internal functions */
@@ -152,7 +145,6 @@ var TcHmi;
                 /* public functions */
 
                 addWidget() {
-
                     // add widget selector control
                     const ctrl = TcHmi.ControlFactory.createEx(
                         'TcHmi.Controls.System.TcHmiUserControlHost',
@@ -205,12 +197,19 @@ var TcHmi;
 
                 /* property accessors */
                 getWidgets() {
-                    return this.__cache;
+                    // cache gridstack layout and elements manually
+                    // for some reason element content not retained with call to grid.save()??
+                    this.__grid.save(true, true, (e) => {
+                        this.__widgets.push({ x: e.x, y: e.y, h: e.h, w: e.w, el: e.el });
+                    });
+
+                    return this.__widgets;
                 }
 
                 setWidgets(value) {
-                    if (value.length)
-                        this.__cache = value;
+                    if (value.length) {
+                        this.__widgets = value;
+                    }
                 }
 
             }
